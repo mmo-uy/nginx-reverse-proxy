@@ -1,0 +1,26 @@
+version: "3"
+
+services:
+  reverseproxy:
+    image: nginx:alpine
+    ports:
+      - 8080:8080
+      - 8081:8081
+    restart: always
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+    depends_on:
+      - nginx
+      - apache
+
+  nginx:
+    image: nginx:alpine
+    restart: always
+    volumes:
+      - ./nginx-html:/usr/share/nginx/html
+
+  apache:
+    image: httpd:alpine
+    restart: always
+    volumes:
+      - ./apache-htdocs:/usr/local/apache2/htdocs
