@@ -1,0 +1,17 @@
+version: "3"
+services:
+  proxy:
+    build: ./
+    networks:
+      - site1
+      - site2
+    ports:
+      - 80:8081
+
+networks:
+  site1:
+    external: true
+    name: site1_default
+  site2:
+    external: true
+    name: site2_default
